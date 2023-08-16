@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.write.ToolsImFriendGroupTagWriteMapper">
+    <insert id="insertGroupTag">
+        insert into tools_im_friend_group_tag (tag_id,tag_name, tag_status, operate_user,
+                                               create_time)
+        values (#{tagId,jdbcType=VARCHAR},#{tagName,jdbcType=VARCHAR}, #{tagStatus,jdbcType=VARCHAR}, #{operateUser,jdbcType=VARCHAR},
+                #{createTime,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateGroupTag">
+        update tools_im_friend_group_tag
+        <set>
+            <if test="tagName != null">
+                tag_name = #{tagName,jdbcType=VARCHAR},
+            </if>
+            <if test="tagStatus != null">
+                tag_status = #{tagStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="operateUser != null">
+                operate_user = #{operateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where tag_id = #{tagId,jdbcType=VARCHAR}
+    </update>
+    <delete id="delGroupTag">
+        delete from tools_im_friend_group_tag where tag_id = #{tagId,jdbcType=VARCHAR}
+    </delete>
+</mapper>

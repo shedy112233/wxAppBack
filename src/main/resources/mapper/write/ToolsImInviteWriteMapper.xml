@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.write.ToolsImInviteWriteMapper">
+    <insert id="insertInviteInfo" keyColumn="Id" keyProperty="id" useGeneratedKeys="true">
+        insert into tools_im_invite (id, phone, invite_code, create_time, accept_person, accept_time
+        )
+        values (trim(#{id,jdbcType=VARCHAR}),
+                trim(#{phone,jdbcType=VARCHAR}),
+                trim(#{inviteCode,jdbcType=VARCHAR}),
+                trim(#{createTime,jdbcType=VARCHAR}),
+                trim(#{acceptPerson,jdbcType=VARCHAR}),
+                trim(#{acceptTime,jdbcType=VARCHAR})
+               )
+    </insert>
+    <update id="updateInviteInfo">
+        update tools_im_invite
+        <set>
+            <if test="acceptPerson != '' and acceptPerson != null">
+                accept_person = #{acceptPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="acceptTime != '' and acceptTime != null">
+                accept_time = #{acceptTime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where invite_code = #{inviteCode,jdbcType=VARCHAR}
+    </update>
+</mapper>

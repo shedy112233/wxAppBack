@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.write.ToolsImBindInfoWriteMapper">
+    <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into tools_im_bind_info (id,invite_id, accept_id, bind_time,
+                                        bind_status)
+        values (#{id,jdbcType=VARCHAR},#{inviteId,jdbcType=VARCHAR}, #{acceptId,jdbcType=VARCHAR}, #{bindTime,jdbcType=DATE},
+                #{bindStatus,jdbcType=VARCHAR})
+    </insert>
+</mapper>

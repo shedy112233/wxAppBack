@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.read.ToolsImInviteReadMapper">
+    <resultMap id="BaseResultMap" type="com.yinhai.yypt_lp.vo.ToolsImInviteVo">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="invite_code" jdbcType="VARCHAR" property="inviteCode" />
+        <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+        <result column="accept_person" jdbcType="VARCHAR" property="acceptPerson" />
+        <result column="accept_time" jdbcType="VARCHAR" property="acceptTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, phone, invite_code, create_time, accept_person, accept_time
+    </sql>
+    <select id="queryInviteInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tools_im_invite
+        where 1=1
+        <if test="phone != '' and phone != null">
+            and phone = #{phone,jdbcType=VARCHAR}
+        </if>
+        <if test="inviteCode != '' and inviteCode != null">
+            and invite_code = #{inviteCode,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != '' and createTime != null">
+            and create_time = #{createTime,jdbcType=VARCHAR}
+        </if>
+        <if test="acceptPerson != '' and acceptPerson != null">
+            and accept_person = #{acceptPerson,jdbcType=VARCHAR}
+        </if>
+        <if test="acceptTime != '' and acceptTime != null">
+            and accept_time = #{acceptTime,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="queryInfoByCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tools_im_invite
+        where phone = #{phone,jdbcType=VARCHAR}
+        and accept_person is null
+        and accept_time is null;
+    </select>
+
+    <select id="queryInfoByInviteCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tools_im_invite
+        where 1=1
+        <if test="inviteCode != '' and inviteCode != null">
+        and invite_code = #{inviteCode,jdbcType=VARCHAR}
+        </if>
+        and accept_person is null
+        and accept_time is null;
+    </select>
+</mapper>

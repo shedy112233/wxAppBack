@@ -1,0 +1,63 @@
+ta404:
+  application:
+    name: ta404
+    version: 5.3.2-RELEASE
+spring:
+  profiles:
+    active: dev,datasource,websecurity
+  application:
+    name: ${ta404.application.name}
+  main:
+    allow-bean-definition-overriding: true
+  banner:
+    location: banner.txt
+  output:
+    ansi:
+      enabled: always
+  servlet:
+    multipart:
+      max-file-size: 20MB
+  jackson:
+    time-zone: GMT+8:00
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+    parser:
+      ALLOW_SINGLE_QUOTES: true
+  redis:
+    #    host: 192.168.190.129
+    host: 175.27.193.253
+    # 连接端口号
+    port: 6379
+    password: 111111
+    # 数据库索引（0 - 15）
+    database: 0
+    # 连接超时时间（毫秒）
+    timeout: 10000
+    # lettuce 参数
+    lettuce:
+      pool:
+        # 最大连接数(使用负值表示没有限制) 默认为 8
+        max-active: 10
+        # 最大阻塞等待时间(使用负值表示没有限制) 默认为 -1 ms
+        max-wait: -1
+        # 最大空闲连接 默认为 8
+        max-idle: 5
+        # 最小空闲连接 默认为 0
+        min-idle: 0
+
+server:
+  port: 8082
+  servlet:
+    session:
+      timeout: 7200s
+    context-path: /ta404
+#server:
+#  port: 8085
+#  ssl:
+#    key-store: classpath:eicos.com.cn.jks #证书的路径
+#    key-store-password: 5pb22v5u14w #证书密码，请修改为您自己证书的密码.
+#    key-store-type: JKS #秘钥库类型
+#    enabled: true

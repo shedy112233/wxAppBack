@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.read.ToolsImInviteByCodeReadMapper">
+    <resultMap id="BaseResultMap" type="com.yinhai.yypt_lp.vo.ToolsImInviteByCodeVo">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="invite_phone" jdbcType="VARCHAR" property="invitePhone" />
+        <result column="invited_nickName" jdbcType="VARCHAR" property="invitedNickName" />
+        <result column="invited_avatar" jdbcType="VARCHAR" property="invitedAvatar" />
+        <result column="invited_phone" jdbcType="VARCHAR" property="invitedPhone" />
+        <result column="apply_reason" jdbcType="VARCHAR" property="applyReason" />
+        <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+        <result column="friend_status" jdbcType="VARCHAR" property="friendStatus" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, invite_phone, invited_nickName, invited_avatar, invited_phone, apply_reason,
+    create_time,friend_status
+    </sql>
+
+    <select id="queryInvitedInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tools_im_invite_by_code
+        where 1=1
+        <if test="id != '' and id != null">
+            and id = #{id}
+        </if>
+        <if test="invitePhone != '' and invitePhone != null">
+            and invite_phone = #{invitePhone}
+        </if>
+        <if test="invitedNickName != '' and invitedNickName != null">
+            and invited_nickName = #{invitedNickName}
+        </if>
+        <if test="invitedAvatar != '' and invitedAvatar != null">
+            and invited_avatar = #{invitedAvatar}
+        </if>
+        <if test="invitedPhone != '' and invitedPhone != null">
+            and invited_phone = #{invitedPhone}
+        </if>
+        <if test="applyReason != '' and applyReason != null">
+            and apply_reason = #{applyReason}
+        </if>
+        and friend_status = 'NO_FRIEND'
+        order by create_time desc
+    </select>
+</mapper>

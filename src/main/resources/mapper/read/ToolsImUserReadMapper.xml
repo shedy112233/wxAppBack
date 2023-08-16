@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.read.ToolsImUserReadMapper">
+    <resultMap id="BaseResultMap" type="com.yinhai.yypt_lp.entity.ToolsImUserEntity">
+        <id column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="open_id" jdbcType="VARCHAR" property="openId" />
+        <result column="user_image" jdbcType="VARCHAR" property="userImage" />
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+        <result column="user_status" jdbcType="VARCHAR" property="userStatus" />
+        <result column="user_role" jdbcType="VARCHAR" property="userRole" />
+        <result column="bz" jdbcType="VARCHAR" property="bz" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        phone, open_id, user_image, nick_name, user_status, user_role,invite_code,bz
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tools_im_user
+        where 1=1
+        <if test="phone != '' and phone != null">
+            and phone = #{phone,jdbcType=VARCHAR}
+        </if>
+        <if test="openId != '' and openId != null">
+            and open_id = #{openId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="queryInfoByOther" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tools_im_user
+        where 1=1
+        <if test="inviteCode != '' and inviteCode != null">
+            and invite_code = #{inviteCode,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="queryAllInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tools_im_user
+    </select>
+    <select id="queryByPhone" resultType="com.yinhai.yypt_lp.entity.ToolsImUserEntity" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from
+        tools_im_user
+        where
+        user_status = 'EFFECTIVE'
+        and phone = #{phone}
+    </select>
+    <select id="queryList" resultType="com.yinhai.yypt_lp.entity.ToolsImUserEntity" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from
+        tools_im_user
+        where
+        user_status = 'EFFECTIVE'
+        <if test="phone != '' and phone != null">
+            and phone = #{phone,jdbcType=VARCHAR}
+        </if>
+        <if test="nickName != '' and nickName != null">
+            and nick_name like concat('%',#{nickName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="userRole != '' and userRole != null">
+            and user_role = #{userRole,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="queryByPhoneForC" resultType="com.yinhai.yypt_lp.entity.ToolsImUserC">
+        select
+            phone ,
+            open_id as openId,
+            user_image as userImage,
+            nick_name as nickName,
+            user_status as userStatus,
+            user_role as userRole,
+            invite_code as inviteCode,
+            bz
+        from
+            tools_im_user
+        where
+            phone = #{phone}
+    </select>
+</mapper>

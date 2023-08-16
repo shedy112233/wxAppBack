@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.write.ToolsImUserBzWriteMapper">
+    <insert id="insertInfo">
+        insert into tools_im_user_bz (id,phone, `desc`, bz,
+                                      `operator`, create_time)
+        values (#{id,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR},
+                #{operator,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="updateInfo">
+        update tools_im_user_bz
+        <set>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="desc != null">
+                `desc` = #{desc,jdbcType=VARCHAR},
+            </if>
+            <if test="bz != null">
+                bz = #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="operator != null">
+                `operator` = #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

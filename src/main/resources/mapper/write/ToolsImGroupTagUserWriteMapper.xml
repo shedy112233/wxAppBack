@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.write.ToolsImGroupTagUserWriteMapper">
+    <insert id="insertInfo" keyColumn="id" keyProperty="id" parameterType="com.yinhai.yypt_lp.vo.ToolsImGroupTagUserVo" useGeneratedKeys="true">
+        insert into tools_im_group_tag_user (id, tag_id, phone, create_time,nick_name
+        )
+        values (#{id,jdbcType=VARCHAR},#{tagId,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR},
+                #{nickName,jdbcType=VARCHAR})
+    </insert>
+    <delete id="delInfo" parameterType="java.lang.String">
+        delete from tools_im_group_tag_user
+        where tag_id = #{tagId,jdbcType=VARCHAR}
+    </delete>
+</mapper>

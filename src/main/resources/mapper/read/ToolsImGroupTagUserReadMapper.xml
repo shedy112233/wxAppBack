@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.read.ToolsImGroupTagUserReadMapper">
+    <resultMap id="BaseResultMap" type="com.yinhai.yypt_lp.vo.ToolsImGroupTagUserVo">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="tag_id" jdbcType="VARCHAR" property="tagId" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, tag_id, phone, create_time,nick_name
+    </sql>
+    <select id="queryInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tools_im_group_tag_user
+        where 1=1
+        <if test="id != '' and id != null">
+            and id = #{id,jdbcType=VARCHAR}
+        </if>
+        <if test="tagId != '' and tagId != null">
+            and tag_id = #{tagId,jdbcType=VARCHAR}
+        </if>
+        <if test="phone != '' and phone != null">
+            and phone = #{phone,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != '' and createTime != null">
+            and create_time = #{createTime,jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>

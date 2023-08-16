@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.read.ToolsImBindInfoReadMapper">
+    <resultMap id="BaseResultMap" type="com.yinhai.yypt_lp.vo.ToolsImBindInfoVo">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="invite_id" jdbcType="VARCHAR" property="inviteId" />
+        <result column="accept_id" jdbcType="VARCHAR" property="acceptId" />
+        <result column="bind_time" jdbcType="DATE" property="bindTime" />
+        <result column="bind_status" jdbcType="VARCHAR" property="bindStatus" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, invite_id, accept_id, bind_time, bind_status
+    </sql>
+    <select id="selectInfoByVo" parameterType="com.yinhai.yypt_lp.vo.ToolsImBindInfoVo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tools_im_bind_info
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>

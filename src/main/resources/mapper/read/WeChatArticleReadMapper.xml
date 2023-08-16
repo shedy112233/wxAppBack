@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.yinhai.yypt_lp.mapper.read.WeChatArticleReadMapper">
+
+        <resultMap type="com.yinhai.yypt_lp.entity.WechatArticle" id="WechatArticleMap">
+            <result property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="content" column="content" jdbcType="BINARY"/>
+            <result property="startTime" column="start_time" jdbcType="TIMESTAMP"/>
+            <result property="endTime" column="end_time" jdbcType="TIMESTAMP"/>
+            <result property="sort" column="sort" jdbcType="INTEGER"/>
+            <result property="aae036" column="aae036" jdbcType="TIMESTAMP"/>
+            <result property="aae011" column="aae011" jdbcType="VARCHAR"/>
+            <result property="remarks" column="remarks" jdbcType="VARCHAR"/>
+            <result property="fileName" column="file_name" jdbcType="VARCHAR"/>
+            <result property="introduction" column="introduction" jdbcType="VARCHAR"/>
+            <result property="fileType" column="file_type" jdbcType="VARCHAR"/>
+            <result property="path" column="path" jdbcType="VARCHAR"/>
+            <result property="cosKey" column="cos_key" jdbcType="VARCHAR"/>
+        </resultMap>
+
+        <!--查询单个-->
+        <select id="queryById" resultType="com.yinhai.yypt_lp.entity.WechatArticle">
+            select
+                id as id,
+                title as title,
+                content as content,
+                start_time as startTime,
+                end_time as endTime,
+                sort as sort,
+                aae036 as aae036,
+                aae011 as aae011,
+                remarks as remarks,
+                introduction as introduction,
+                file_name as fileName,
+                file_type as fileType
+            from
+                wechat_article_d
+            where id = #{id}
+    </select>
+
+        <!--查询指定行数据-->
+        <select id="queryList" resultType="com.yinhai.yypt_lp.entity.WechatArticle">
+            select
+            id as id, title as title, start_time as startTime, end_time as endTime, sort as sort, aae036 as aae036, aae011 as aae011, remarks as remarks,
+            introduction as introduction,
+            file_name as fileName,
+            file_type as fileType
+            from wechat_article_d
+            <where>
+                <if test="title != null and title != ''">
+                    and title = #{title}
+                </if>
+                <if test="startTime != null">
+                    and DATE_FORMAT(start_time, '%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime}, '%Y-%m-%d')
+                </if>
+                <if test="endTime != null">
+                    and end_time &lt; DATE_ADD(#{endTime},interval 1 day)
+                </if>
+            </where>
+            order by sort
+        </select>
+    <select id="queryListForSort" resultType="com.yinhai.yypt_lp.entity.WechatArticle">
+        select
+        id as id, title as title, start_time as startTime, end_time as endTime, sort as sort, aae036 as aae036, aae011 as aae011, remarks as remarks,
+        introduction as introduction,
+        file_name as fileName,
+        file_type as fileType,
+        `path` as path,
+        cos_key as cosKey
+        from wechat_article_d
+        where
+            DATE_FORMAT(start_time, '%Y-%m-%d') &lt;= #{startTime}
+          and end_time &gt; DATE_ADD(#{endTime},interval 1 day)
+        order by sort
+    </select>
+</mapper>

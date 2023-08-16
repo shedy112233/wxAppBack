@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.read.ToolsImMsgLogReadMapper">
+    <resultMap id="BaseResultMap" type="com.yinhai.yypt_lp.vo.ToolsImMsgLogVo">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="msg_type" jdbcType="VARCHAR" property="msgType" />
+        <result column="path" jdbcType="VARCHAR" property="path" />
+        <result column="msg_key" jdbcType="VARCHAR" property="msgKey" />
+        <result column="craete_time" jdbcType="VARCHAR" property="craeteTime" />
+        <result column="cos_key" jdbcType="VARCHAR" property="cosKey" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, phone, msg_type, `path`, msg_key, craete_time, cos_key
+    </sql>
+    <select id="getMsgLog" parameterType="com.yinhai.yypt_lp.vo.ToolsImMsgLogVo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tools_im_msg_log
+        where 1=1
+        <if test="id != '' and id != null">
+            and id = #{id,jdbcType=VARCHAR}
+        </if>
+        <if test="phone != '' and phone != null">
+            and phone = #{phone,jdbcType=VARCHAR}
+        </if>
+        <if test="msgType != '' and msgType != null">
+            and msg_type = #{msgType,jdbcType=VARCHAR}
+        </if>
+        <if test="path != '' and path != null">
+            and `path` = #{path,jdbcType=VARCHAR}
+        </if>
+        <if test="msgKey != '' and msgKey != null">
+            and msg_key = #{msgKey,jdbcType=VARCHAR}
+        </if>
+        <if test="craeteTime != '' and craeteTime != null">
+            and craete_time = #{craeteTime,jdbcType=VARCHAR}
+        </if>
+        order by craete_time desc
+        limit 1
+    </select>
+</mapper>

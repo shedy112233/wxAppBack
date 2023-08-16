@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.write.ToolsImMsgLogWriteMapper">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from tools_im_msg_log
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insertMsgLog" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into tools_im_msg_log (id,phone, msg_type, `path`,
+                                      msg_key, craete_time,cos_key,to_phone)
+        values (#{id,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR}, #{msgType,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR},
+                #{msgKey,jdbcType=VARCHAR}, #{craeteTime,jdbcType=VARCHAR}, #{cosKey,jdbcType=VARCHAR}, #{toPhone,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateMsgLog">
+        update tools_im_msg_log
+        set
+            `path` = #{path,jdbcType=VARCHAR},
+            cos_key = #{cosKey,jdbcType=VARCHAR}
+        where `path` is null and cos_key is null
+    </update>
+</mapper>

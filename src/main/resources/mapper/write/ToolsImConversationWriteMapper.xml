@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.write.ToolsImConstantWriteMapper">
+    <insert id="insertConversation" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into tools_im_conversation (id,from_id, to_id, conversation_status,
+                                           conversation_id, create_time)
+        values (#{id,jdbcType=VARCHAR},#{fromId,jdbcType=VARCHAR}, #{toId,jdbcType=VARCHAR}, #{conversationStatus,jdbcType=VARCHAR},
+                #{conversationId,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateConversation" parameterType="com.yinhai.yypt_lp.vo.ToolsImConversationVo">
+        update tools_im_conversation
+        <set>
+            <if test="fromId != null">
+                from_id = #{fromId,jdbcType=VARCHAR},
+            </if>
+            <if test="toId != null">
+                to_id = #{toId,jdbcType=VARCHAR},
+            </if>
+            <if test="conversationStatus != null">
+                conversation_status = #{conversationStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="conversationId != null">
+                conversation_id = #{conversationId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where conversation_id = #{conversationId,jdbcType=VARCHAR}
+    </update>
+</mapper>

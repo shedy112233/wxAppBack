@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.write.WeChatArticleWriteMapper">
+
+    <!--新增所有列-->
+    <insert id="insert" parameterType="com.yinhai.yypt_lp.entity.WechatArticle">
+        insert into wechat_article_d(id, title, content, start_time, end_time, sort, aae036, aae011, remarks,file_name,file_type,introduction,path,cos_key)
+        values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=BINARY}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER}, #{aae036,jdbcType=TIMESTAMP},
+                #{aae011,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR},#{fileName},#{fileType},#{introduction},
+                #{path,jdbcType=VARCHAR}, #{cosKey,jdbcType=VARCHAR})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update" parameterType="com.yinhai.yypt_lp.entity.WechatArticle">
+        update wechat_article_d
+        <set>
+            <if test="title != null and title != ''">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="aae036 != null">
+                aae036 = #{aae036,jdbcType=TIMESTAMP},
+            </if>
+            <if test="aae011 != null and aae011 != ''">
+                aae011 = #{aae011,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null and remarks != ''">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null and introduction != ''">
+                introduction = #{introduction,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateSort">
+        update wechat_article_d
+        set sort = #{sort},
+            sort_time = now()
+        where id = #{id}
+    </update>
+
+    <!--通过主键物理删除-->
+    <delete id="deleteById">
+        delete from wechat_article_d where id = #{id}
+    </delete>
+
+
+</mapper>

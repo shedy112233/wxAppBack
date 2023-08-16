@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.write.WeChatPicCWriteMapper">
+
+    <!--新增所有列-->
+    <insert id="insertC" parameterType="com.yinhai.yypt_lp.entity.WechatPicC">
+        insert into wechat_pic_c(c_id,evt_type,id, pic, start_time, end_time, sort, aae036, aae011, remarks)
+        values (#{cId,jdbcType=VARCHAR},#{evtType},#{id,jdbcType=VARCHAR}, #{pic,jdbcType=OTHER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER}, #{aae036,jdbcType=TIMESTAMP}, #{aae011,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+    </insert>
+
+</mapper>

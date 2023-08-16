@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.write.ToolsImGroupMsgLogWriteMapper">
+    <insert id="insertInfo" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into tools_im_group_msg_log (id,group_id, msg_type, `path`,
+                                            msg_key, create_time, cos_key)
+        values (#{id,jdbcType=VARCHAR},#{groupId,jdbcType=VARCHAR}, #{msgType,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR},
+                #{msgKey,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR},#{cosKey,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateInfo">
+        update tools_im_group_msg_log
+        set `path` =  #{path,jdbcType=VARCHAR},
+            cos_key = #{cosKey,jdbcType=VARCHAR}
+        where `path` is null
+          and cos_key is null
+    </update>
+</mapper>

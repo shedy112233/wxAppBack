@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinhai.yypt_lp.mapper.read.ToolsImConversationReadMapper">
+    <resultMap id="BaseResultMap" type="com.yinhai.yypt_lp.vo.ToolsImConversationVo">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="from_id" jdbcType="VARCHAR" property="fromId" />
+        <result column="to_id" jdbcType="VARCHAR" property="toId" />
+        <result column="conversation_status" jdbcType="VARCHAR" property="conversationStatus" />
+        <result column="conversation_id" jdbcType="VARCHAR" property="conversationId" />
+        <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, from_id, to_id, conversation_status, conversation_id, create_time
+    </sql>
+    <select id="queryConversation" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tools_im_conversation
+        where 1=1
+        <if test="id != '' and id != null">
+            and id = #{id,jdbcType=VARCHAR}
+        </if>
+        <if test="fromId != '' and fromId != null">
+            and from_id = #{fromId,jdbcType=VARCHAR}
+        </if>
+        <if test="toId != '' and toId != null">
+            and to_id = #{toId,jdbcType=VARCHAR}
+        </if>
+        <if test="conversationStatus != '' and conversationStatus != null">
+            and conversation_status = #{conversationStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="conversationId != '' and conversationId != null">
+            and conversation_id = #{conversationId,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != '' and createTime != null">
+            and create_time = #{createTime,jdbcType=VARCHAR}
+        </if>
+    </select>
+</mapper>
